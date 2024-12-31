@@ -2,6 +2,8 @@
 Instantly summarize any text on the web. Highlight any passage, click the QuickSummarize icon, and get a concise summary in seconds. Stay informed, save time, and boost productivity.
 
 # File Structure 
+
+```plaintext
 SmartSummerizer/
 │
 ├── manifest.json           # Extension's configuration file (required)
@@ -39,3 +41,4 @@ SmartSummerizer/
     │   └── messages.json   # English localization
     └── es/
         └── messages.json   # Optional: Spanish localization
+
