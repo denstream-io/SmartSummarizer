@@ -38,9 +38,9 @@ async function summerizeText(prompt) {
         const response = await axios.post(url, data, { headers });
 
         // Extract the summarized content from the API response
-        const result = response.data.choices[0].message.content;
+        const summary = response.data.choices[0].message.content;
 
-        return result; // Return the summarized text
+        return summary; // Return the summarized text
     } catch (error) {
         // Log an error message with details if the API call fails
         console.error(
@@ -63,3 +63,7 @@ const HYBRID_PROMPT = "Summarize the following text using a\
   original text and rephrase them into a more concise and\
   cohesive summary. Here is the text:\
   ${prompt}"
+
+
+const summary = summerizeText(HYBRID_PROMPT);
+console.log(summary)
