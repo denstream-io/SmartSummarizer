@@ -1,0 +1,111 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+   
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+}
+
+.modal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+    background-color: #002F55;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.modal-footer {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #002F55;
+    color: white;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+   
+}
+
+.modal-header .title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+   
+}
+
+.modal-footer .summarizeButton {
+    border-radius: 2px;
+    border: none;
+    padding: 5px 10px;
+    background-color: white;
+    color: #002F55;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+
+.modal-footer .summarizeButton:hover {
+    background-color: #e2e2e2;
+    color: #003d6e;
+    cursor: pointer;
+}
+
+.modal-footer .summarizeButton:active {
+    background-color: white;
+    color: #002F55;
+}
+
+
+.modal-header .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: white;
+}
+
+.modal-body {
+    padding: 10px 15px;
+    color: #002F55;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: rgba(0,0,0,0.5);
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
