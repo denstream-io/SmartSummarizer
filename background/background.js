@@ -1,5 +1,6 @@
 const axios = require("axios"); // Import the Axios library for making HTTP requests
-const { saveUserPreference, getUserPreference } = require("./handlers");
+const { saveUserPreference, getUserPreference } = require("./handlers"); // Imports the functions to store user preferences from handlers.js
+
 // const dotenv = require("dotenv"); // Import dotenv to load environment variables (optional if not used)
 
 // Load environment variables from .env file
@@ -62,10 +63,5 @@ const HYBRID_PROMPT =
   cohesive summary. Here is the text:\
   ${prompt}";
 
-//const summary = summerizeText(HYBRID_PROMPT);
-//console.log(summary)
-
-let method = "hybrid";
-saveUserPreference(method);
-
-getUserPreference(method);
+const summary = summerizeText(HYBRID_PROMPT);
+console.log(summary);

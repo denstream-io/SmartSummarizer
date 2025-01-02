@@ -14,3 +14,5 @@ function getUserPreference(callback) {
     console.log(`User preferred method is : ${preferredMethod}`);
   });
 }
+
+module.exports = { saveUserPreference, getUserPreference };
