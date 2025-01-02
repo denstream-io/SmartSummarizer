@@ -1,0 +1,109 @@
+
+
+.summary-item {
+    cursor: pointer;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    
+    flex: 1 1 calc(33.33% - 20px); /* Responsive width: 3 items per row with gap */
+    box-sizing: border-box; /* Ensure padding is included in size */
+    max-width: 24%; /* Limit width to prevent overflow */
+}
+
+#history-container {
+    display: flex; /* Enable flexbox for alignment */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+    gap: 5px; /* Add spacing between items */
+    justify-content: flex-start; /* Align items to the left */
+    margin-top: 90px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+}
+.nav-bar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #002F55;
+    color: white;
+    padding: 13px 0px;
+    display: flex;
+    justify-content: space-between; /* Distribute space between items */
+    align-items: center; /* Center items vertically */
+}
+
+.nav-bar span {
+    margin-left: 17px;
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#delete-all-btn {
+    margin: 10px;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+.delete-btn:hover {
+    background-color: #d80000;
+}
+
+.delete-btn:active {
+    background-color: red;
+}
+
+#delete-all-btn:hover {
+    background-color: #d80000;
+}
+
+#delete-all-btn:active {
+    background-color: red;
+}
