@@ -14,6 +14,8 @@
     background-color: white;
     width: 500px;
     max-width: 80%;
+
+    
 }
 
 .modal.active {
@@ -55,7 +57,7 @@
    
 }
 
-.modal-footer .summarizeButton {
+.modal-footer .button {
     border-radius: 2px;
     border: none;
     padding: 5px 10px;
@@ -66,13 +68,13 @@
 }
 
 
-.modal-footer .summarizeButton:hover {
+.modal-footer .button:hover {
     background-color: #e2e2e2;
     color: #003d6e;
     cursor: pointer;
 }
 
-.modal-footer .summarizeButton:active {
+.modal-footer .button:active {
     background-color: white;
     color: #002F55;
 }
@@ -91,6 +93,9 @@
 .modal-body {
     padding: 10px 15px;
     color: #002F55;
+
+    max-height: 30vh; /* Limit height to 30% of viewport height */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
 }
 
 #overlay {

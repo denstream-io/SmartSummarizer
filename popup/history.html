@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <link rel="stylesheet" href="history.css">
+    <script src="history.js" defer></script>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <span>Access all of your history here.</span>
+        <button id="delete-all-btn">Delete All History</button>
+    </nav>
+
+    <div id="history-container">
+        <!-- Modals will be dynamically added here -->
+    </div>
+
+    <!-- Modal Template -->
+    <div id="modal-template" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p class="modal-text"></p>
+            <button class="delete-btn">Delete</button>
+        </div>
+    </div>
+
+    <button id="delete-all-btn">Delete All History</button>
+</body>
+</html>

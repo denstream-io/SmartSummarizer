@@ -37,7 +37,14 @@
                 <label>
                     <input type="radio" name="summaryType" value="Hybrid"> Hybrid
                 </label>
-                <button type="button" class="summarizeButton" id="summarizeButton">Summarize</button>
+                <button type="button" class="button" id="summarizeButton">Summarize</button>
+
+                <button type="button" class="button" id="historyButton">History</button>
+        <script>
+            document.getElementById('historyButton').addEventListener('click', function() {
+                window.open('history.html', '_blank');
+            });
+        </script>
         </div>
 
     </div>
