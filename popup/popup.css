@@ -28,10 +28,11 @@
     justify-content: space-between;
     align-items: center;
    
-    background-color: #002F55;
-    color: white;
+    background-color: #ffffff;
+    color: #3dae9c;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    margin-top: 10px;
 }
 
 .modal-footer {
@@ -40,13 +41,14 @@
     justify-content: space-between;
     align-items: center;
 
-    background-color: #002F55;
-    color: white;
+    background-color: #ffffff;
+    color: #002F55;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     
     font-family: 'Roboto', sans-serif;
     font-size: 0.9rem;
+    margin-bottom: 10px;
    
 }
 
@@ -61,22 +63,22 @@
     border-radius: 2px;
     border: none;
     padding: 5px 10px;
-    background-color: white;
-    color: #002F55;
+    background-color: #3dae9c;
+    color: #ffffff;
     font-family: 'Roboto', sans-serif;
 
 }
 
 
 .modal-footer .button:hover {
-    background-color: #e2e2e2;
-    color: #003d6e;
+    background-color: #2e8375;
+    color: #ffffff;
     cursor: pointer;
 }
 
 .modal-footer .button:active {
-    background-color: white;
-    color: #002F55;
+    background-color: #3dae9c;
+    color: #ffffff;
 }
 
 
@@ -87,13 +89,12 @@
     background: none;
     font-weight: bold;
     font-size: 1.25rem;
-    color: white;
+    color: #3dae9c;
 }
 
 .modal-body {
-    padding: 10px 15px;
-    color: #002F55;
-
+    padding: 5px 15px 10px 15px;
+    color: #000000;
     max-height: 30vh; /* Limit height to 30% of viewport height */
     overflow-y: auto; /* Enable vertical scrolling if content overflows */
 }
@@ -114,3 +115,34 @@
     opacity: 1;
     pointer-events: all;
 }
+
+label {
+    color: #3dae9c;
+}
+
+/* Hide the default radio button */
+input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #3dae9c; /* Border of the radio button */
+    border-radius: 10%; /* Circular border */
+    position: relative;
+    cursor: pointer;
+    background-color: white; /* Background color of the radio button */
+  }
+  
+  /* Create the dot inside the radio button when it's checked */
+  input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%; /* Position the dot */
+    left: 50%; /* Position the dot */
+    width: 5px; /* Size of the dot */
+    height: 5px; /* Size of the dot */
+    border-radius: 10%; /* Make the dot circular */
+    background-color: #3dae9c; /* Change this to your desired color */
+    transform: translate(-50%, -50%); /* Center the dot */
+  }
