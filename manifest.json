@@ -22,7 +22,7 @@
       "js": ["content/content.js"]
     }
   ],
-  "options_page": "options/options.html",
+  
   "_locales": {
     "default_locale": "en"
   }
