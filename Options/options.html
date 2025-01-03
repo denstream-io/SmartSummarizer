@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summarization Options</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="options-container">
+        <h1>Summarization Options</h1>
+
+        <div>
+            <label for="default-method">Choose Default Method:</label>
+            <select id="default-method">
+                <option value="extractive">Extractive</option>
+                <option value="abstractive">Abstractive</option>
+                <option value="hybrid">Hybrid</option>
+            </select>
+        </div>
+
+        <div class="toggle-container">
+            <label for="toggle-method">Switch Summarization Method:</label>
+            <label class="switch">
+                <input type="checkbox" id="toggle-method" disabled>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <button id="save-settings">Save</button>
+
+        <p id="confirmation-message"></p>
+    </div>
+    <script src="options.js"></script>
+</body>
+</html>
