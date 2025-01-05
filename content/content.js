@@ -1,17 +1,11 @@
-// content_script.js
-
 let eventListenerAdded = false;
 
 // Function to handle when the user presses Ctrl+Shift+S
 function handleKeyPress(event) {
-  // Checks if the user pressed Ctrl+Shift+S
   if (event.ctrlKey && event.shiftKey && event.key === "S") {
     const selectedText = window.getSelection().toString().trim();
-    // Checks for selected text
     if (selectedText) {
       console.log("Selected text:", selectedText);
-      // Sends the selected text to background.js with retry logic
-      sendMessageWithRetry({ action: "sendSelectedText", text: selectedText });
       showModal(selectedText); // Show modal with selected text
     } else {
       console.log("No text selected!");
@@ -21,33 +15,38 @@ function handleKeyPress(event) {
 
 // Function to send a message with retry logic
 function sendMessageWithRetry(message, retries = 5) {
-  chrome.runtime.sendMessage(message, (response) => {
-    if (chrome.runtime.lastError && retries > 0) {
-      console.warn(
-        "Retrying message due to:",
-        chrome.runtime.lastError.message
-      );
-      setTimeout(() => sendMessageWithRetry(message, retries - 1), 1000);
-    } else if (chrome.runtime.lastError) {
-      console.error(
-        "Failed to send message after retries:",
-        chrome.runtime.lastError.message
-      );
-    } else {
-      console.log("Message sent successfully:", response);
-    }
-  });
+  try {
+    chrome.runtime.sendMessage(message, (response) => {
+      if (chrome.runtime.lastError && retries > 0) {
+        console.warn(
+          "Retrying message due to:",
+          chrome.runtime.lastError.message
+        );
+        setTimeout(() => sendMessageWithRetry(message, retries - 1), 1000);
+      } else if (chrome.runtime.lastError) {
+        console.error(
+          "Failed to send message after retries:",
+          chrome.runtime.lastError.message
+        );
+      } else {
+        console.log("Message sent successfully:", response);
+        if (response && response.summary) {
+          updateModalContent(response.summary); // Update modal with summary
+        }
+      }
+    });
+  } catch (error) {
+    console.error("Error in sendMessageWithRetry:", error);
+  }
 }
 
 // Function to show the modal with the selected text
 function showModal(selectedText) {
-  // Check if a modal already exists, remove it if so
   const existingModal = document.getElementById("customModal");
   if (existingModal) {
     existingModal.remove();
   }
 
-  // Create a modal dynamically using innerHTML
   const modalHTML = `
     <style>
       *, *::after, *::before {
@@ -86,7 +85,7 @@ function showModal(selectedText) {
       .modal-footer {
         padding: 10px 15px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         background-color: #ffffff;
         color: #002F55;
@@ -110,6 +109,7 @@ function showModal(selectedText) {
         background-color: #3dae9c;
         color: #ffffff;
         font-family: 'Roboto', sans-serif;
+        margin-top: 10px;
       }
 
       .modal-footer .button:hover {
@@ -156,84 +156,63 @@ function showModal(selectedText) {
         opacity: 1;
         pointer-events: all;
       }
-
-      label {
-        color: #3dae9c;
-      }
-
-      /* Hide the default radio button */
-      input[type="radio"] {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        width: 10px;
-        height: 10px;
-        border: 1px solid #3dae9c; /* Border of the radio button */
-        border-radius: 10%; /* Circular border */
-        position: relative;
-        cursor: pointer;
-        background-color: white; /* Background color of the radio button */
-      }
-  
-      /* Create the dot inside the radio button when it's checked */
-      input[type="radio"]:checked::before {
-        content: '';
-        position: absolute;
-        top: 50%; /* Position the dot */
-        left: 50%; /* Position the dot */
-        width: 5px; /* Size of the dot */
-        height: 5px; /* Size of the dot */
-        border-radius: 10%; /* Make the dot circular */
-        background-color: #3dae9c; /* Change this to your desired color */
-        transform: translate(-50%, -50%); /* Center the dot */
-      }
     </style>
     
-    <div class="modal" id="modal">
+    <div class="modal" id="customModal">
       <div class="modal-header">
         <div class="title">Smart Summarizer</div>
         <button id="closeModal" data-close-button class="close-button">&times;</button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="modalBody">
         ${selectedText}
       </div>
       <div class="modal-footer">
-        <label>
-          <input type="radio" name="summaryType" value="Extractive"> Extractive
-        </label>
-        <label>
-          <input type="radio" name="summaryType" value="Abstractive" checked> Abstractive
-        </label>
-        <label>
-          <input type="radio" name="summaryType" value="Hybrid"> Hybrid
-        </label>
         <button type="button" class="button" id="summarizeButton">Summarize</button>
-        <button type="button" class="button" id="historyButton">History</button>
       </div>
     </div>
     <div id="overlay"></div>
   `;
 
-  // Add the modal to the document body
   document.body.insertAdjacentHTML("beforeend", modalHTML);
   const modal = document.querySelector(".modal");
   openModal(modal);
 
-  // Add event listener to close the modal
-  document.getElementById("closeModal").addEventListener("click", () => {
-    const modal = document.getElementById("modal");
-    closeModal(modal);
-  });
+  // Ensure elements exist before adding event listeners
+  const closeModalButton = document.getElementById("closeModal");
+  const summarizeButton = document.getElementById("summarizeButton");
 
-  // Add event listener to summarize button
-  document.getElementById("summarizeButton").addEventListener("click", () => {
-    sendMessageWithRetry({ action: "summarizeText", text: selectedText });
-  });
+  if (closeModalButton) {
+    closeModalButton.addEventListener("click", () => {
+      closeModal(modal);
+    });
+  } else {
+    console.error("Close modal button not found.");
+  }
 
-  // Add event listener to history button
-  document.getElementById("historyButton").addEventListener("click", () => {
-    window.open("history.html", "_blank");
-  });
+  if (summarizeButton) {
+    summarizeButton.addEventListener("click", () => {
+      try {
+        const selectedText = document.querySelector("#modalBody").innerText;
+        sendMessageWithRetry({ action: "summarizeText", text: selectedText });
+      } catch (error) {
+        console.error("Error in summarizeButton click event:", error);
+      }
+    });
+  } else {
+    console.error("Summarize button not found.");
+  }
+}
+
+// Function to update the modal content
+function updateModalContent(summary) {
+  try {
+    const modalBody = document.getElementById("modalBody");
+    if (modalBody) {
+      modalBody.innerText = summary;
+    }
+  } catch (error) {
+    console.error("Error in updateModalContent:", error);
+  }
 }
 
 // Function to close the modal
