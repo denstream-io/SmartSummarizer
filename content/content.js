@@ -31,9 +31,6 @@ function sendMessageWithRetry(message, retries = 5) {
           );
         } else {
           console.log("Message sent successfully:", response);
-          if (response && response.prompt) {
-            updateModalContent(response.prompt); // Update modal with received prompt
-          }
         }
       });
     } else {
@@ -197,7 +194,11 @@ function showModal(selectedText) {
     summarizeButton.addEventListener("click", () => {
       try {
         const selectedText = document.querySelector("#modalBody").innerText;
-        sendMessageWithRetry({ action: "summarizeText", text: selectedText });
+        console.log("Summarize button clicked with text:", selectedText);
+        sendMessageWithRetry({
+          action: "sendSelectedText",
+          text: selectedText,
+        });
       } catch (error) {
         console.error("Error in summarizeButton click event:", error);
       }
@@ -238,3 +239,11 @@ if (!eventListenerAdded) {
   document.addEventListener("keydown", handleKeyPress);
   eventListenerAdded = true;
 }
+
+// Listen for messages from the background script
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "receiveSummary") {
+    console.log("Received summary from background script:", message.summary);
+    updateModalContent(message.summary);
+  }
+});
