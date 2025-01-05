@@ -42,13 +42,3 @@ const getAllHistory = async () => {
     return [];
   }
 };
-
-// Export all the above declared functions to be used in background.js
-
-export {
-  savePreference,
-  getPreference,
-  saveHistory,
-  clearHistory,
-  getAllHistory,
-};
