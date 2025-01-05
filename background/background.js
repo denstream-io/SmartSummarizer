@@ -1,5 +1,5 @@
-const axios = require("axios"); // Import the Axios library for making HTTP requests
-const { saveUserPreference, getUserPreference } = require("./handlers"); // Imports the functions to store user preferences from handlers.js
+importScripts("../lib/axios.min.js"); // Import the Axios library for making HTTP requests
+importScripts("storage.js"); // Imports the functions to store user preferences from handlers.js
 
 // const dotenv = require("dotenv"); // Import dotenv to load environment variables (optional if not used)
 
@@ -7,7 +7,15 @@ const { saveUserPreference, getUserPreference } = require("./handlers"); // Impo
 // dotenv.config();
 
 // OpenAI API key (replace with your actual API key or load it from environment variables for security)
-const OPENAI_API_KEY = "";
+//const OPENAI_API_KEY = "";
+
+// Get the prompt text (text to be summarized) from contentscript.js
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "sendSelectedText") {
+    console.log("Received selected text:", message.text);
+  }
+});
 
 /**
  * Summarizes a given text using the OpenAI ChatGPT API.
@@ -15,7 +23,7 @@ const OPENAI_API_KEY = "";
  * @param {string} prompt - The text or instructions for the AI to summarize.
  * @returns {Promise<string>} - The summarized text returned by the OpenAI API.
  * @throws {Error} - Throws an error if the API call fails.
- */
+ 
 async function summerizeText(prompt) {
   // OpenAI API endpoint for chat-based completions
   const url = "https://api.openai.com/v1/chat/completions";
@@ -65,3 +73,4 @@ const HYBRID_PROMPT =
 
 const summary = summerizeText(HYBRID_PROMPT);
 console.log(summary);
+*/
