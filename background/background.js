@@ -7,13 +7,21 @@ importScripts("storage.js"); // Imports the functions to store user preferences 
 // dotenv.config();
 
 // OpenAI API key (replace with your actual API key or load it from environment variables for security)
-//const OPENAI_API_KEY = "";
+const OPENAI_API_KEY = "";
+
+// Variable to store received text
+
+let receivedText = "";
 
 // Get the prompt text (text to be summarized) from contentscript.js
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "sendSelectedText") {
     console.log("Received selected text:", message.text);
+    receivedText = message.text;
+
+    // Write logic to summarize text and send it back to frontend
+
+    sendResponse({ status: "Text recieved" });
   }
 });
 
@@ -23,7 +31,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
  * @param {string} prompt - The text or instructions for the AI to summarize.
  * @returns {Promise<string>} - The summarized text returned by the OpenAI API.
  * @throws {Error} - Throws an error if the API call fails.
- 
+ */
 async function summerizeText(prompt) {
   // OpenAI API endpoint for chat-based completions
   const url = "https://api.openai.com/v1/chat/completions";
@@ -73,4 +81,3 @@ const HYBRID_PROMPT =
 
 const summary = summerizeText(HYBRID_PROMPT);
 console.log(summary);
-*/
