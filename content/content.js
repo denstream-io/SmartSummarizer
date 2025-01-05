@@ -16,25 +16,29 @@ function handleKeyPress(event) {
 // Function to send a message with retry logic
 function sendMessageWithRetry(message, retries = 5) {
   try {
-    chrome.runtime.sendMessage(message, (response) => {
-      if (chrome.runtime.lastError && retries > 0) {
-        console.warn(
-          "Retrying message due to:",
-          chrome.runtime.lastError.message
-        );
-        setTimeout(() => sendMessageWithRetry(message, retries - 1), 1000);
-      } else if (chrome.runtime.lastError) {
-        console.error(
-          "Failed to send message after retries:",
-          chrome.runtime.lastError.message
-        );
-      } else {
-        console.log("Message sent successfully:", response);
-        if (response && response.summary) {
-          updateModalContent(response.summary); // Update modal with summary
+    if (chrome.runtime && chrome.runtime.sendMessage) {
+      chrome.runtime.sendMessage(message, (response) => {
+        if (chrome.runtime.lastError && retries > 0) {
+          console.warn(
+            "Retrying message due to:",
+            chrome.runtime.lastError.message
+          );
+          setTimeout(() => sendMessageWithRetry(message, retries - 1), 1000);
+        } else if (chrome.runtime.lastError) {
+          console.error(
+            "Failed to send message after retries:",
+            chrome.runtime.lastError.message
+          );
+        } else {
+          console.log("Message sent successfully:", response);
+          if (response && response.prompt) {
+            updateModalContent(response.prompt); // Update modal with received prompt
+          }
         }
-      }
-    });
+      });
+    } else {
+      console.error("Extension context invalidated. Cannot send message.");
+    }
   } catch (error) {
     console.error("Error in sendMessageWithRetry:", error);
   }
