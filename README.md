@@ -1,44 +1,44 @@
+
+<div align="center">
+  <a href="https://youtu.be/cZe7lc9yA14">
+    <img src="https://img.youtube.com/vi/cZe7lc9yA14/0.jpg" alt="Watch the video" />
+  </a>
+</div>
+
+
 # SmartSummarizer
 Instantly summarize any text on the web. Highlight any passage, click the QuickSummarize icon, and get a concise summary in seconds. Stay informed, save time, and boost productivity.
 
-# File Structure 
+```
+Please install the extension onto your system and then use  " ctrl+Shift+S " on your keyboard to get the summary of the selected text. 
+```
 
-```plaintext
-SmartSummerizer/
-│
-├── manifest.json           # Extension's configuration file (required)
-├── background/
-│   ├── background.js       # Background script (backend logic)
-│   ├── handlers.js         # Separate file for background-related helper functions
-│   └── storage.js          # File for managing Chrome storage
-│
-├── popup/
-│   ├── popup.html          # HTML file for popup UI (frontend)
-│   ├── popup.js            # JavaScript file for popup logic
-│   └── popup.css           # CSS file for styling the popup
-│
-├── content/
-│   ├── content.js          # Content script for interacting with web pages
-│   ├── inject.js           # Optional: helper script for DOM injection
-│
-├── assets/
-│   ├── icon16.png          # 16x16 icon
-│   ├── icon48.png          # 48x48 icon
-│   ├── icon128.png         # 128x128 icon
-│   └── logo.png            # Optional: Additional assets like logos/images
-│
-├── lib/
-│   ├── third-party-library.js  # Optional: Any third-party JavaScript libraries
-│   └── utils.js            # Utility functions shared across components
-│
-├── options/
-│   ├── options.html        # Optional: Options page HTML
-│   ├── options.js          # Logic for options page
-│   └── options.css         # Styling for options page
-│
-└── _locales/               # Localization (if needed)
-    ├── en/
-    │   └── messages.json   # English localization
-    └── es/
-        └── messages.json   # Optional: Spanish localization
+## Inspiration
+While browsing through journals and articles, I often needed to just get an overview of that information. So for that, I had to copy the whole text and paste it into an AI chatbot to generate a summary. It is an inconvenience that we are trying to solve here !!!
+## What it does
 
+It generates a summary of selected text using AI models through their APIs
+
+## How we built it
+
+- We designed the project structure first with the guidance of docs for Chrome extension 
+- Defined a manifest.json file and added all scripts and targets for our extension 
+- Divided the work as frontend and backend and started working and collaborating
+- With the help of tools like git and Github, we were able to collaborate while working on features independently 
+- Once a basic prototype was done, we tested it thoroughly to make it as efficient as possible.
+- It involved HTML, CSS, and vanilla JS with a few external libraries like Axios, etc locally installed to support API calls 
+
+## Challenges we ran into
+- Our main challenge was our different time zones. Each of our team belonged to a distinct timezone with no common time to have a proper conversation. Everything happened just through chats while working at different time zones 
+- We were not very successful in procuring an API key due to budget constraints 
+
+## Accomplishments that we're proud of
+- We learned how browser extensions work and how to make them!
+- This is the first online international hackathon, so we accomplished well collaboration, communication and team-building
+## What we learned
+- We learned a lot about how browsers work, what are the core concepts involved in a browser extension, and many more things.
+
+## What's next for SmartSummarizer
+
+- There are a lot of improvements that can be made to this project 
+- We have a thought to make it open source enabling a greater reach to a lot of people.
