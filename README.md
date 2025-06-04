@@ -42,3 +42,6 @@ It generates a summary of selected text using AI models through their APIs
 
 - There are a lot of improvements that can be made to this project 
 - We have a thought to make it open source, enabling a greater reach to a lot of people.
+  
+## Demo
+  - View on [Devpost](https://devpost.com/software/smartsummarizer)
